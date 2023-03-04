@@ -42,7 +42,7 @@ An example of execution is shown (the file Addition.tm can be found on the CodeE
 
 `<< 011001+00111`
 
-´>> 100000´
+`>> 100000`
 
 `$`
 
