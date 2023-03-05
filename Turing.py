@@ -39,6 +39,10 @@ Different ERROR messages cand be printed if code syntax or code rules are broken
 #Used libraries
 from sys import stdin as std
 from copy import copy
+import colorama
+from colorama import Fore
+colorama.init(autoreset=True)
+
 
 class Reader:
     """
@@ -90,7 +94,7 @@ def PrepareCode():
 
     Text=Text.split("\n") #Input file is devided into lines
     Check=CodeCheck(Text) #Checks if code is valid
-    if Check[0]==False: exit(Check[1]) #If not valid, ERROR message stating reason is printed before stopping program
+    if Check[0]==False: exit(Fore.RED+Check[1]) #If not valid, ERROR message stating reason is printed before stopping program
     tape = ['_'] if Text[2] == 'NULL' else list(Text[2]) #If the INPUT is 'NULL' tape is defined as a single empty '_' cell
     for i in range(4): del Text[0] #Command, Headers and INPUT lines are deleted
     code=[] #Code array is deifned
@@ -190,18 +194,24 @@ def PrintTape(Text, Tape):
     """
     aux=copy(Tape) #Creates a copy of the Tape to handle without changing the original array
     if aux==[]: 
-        print(Text+'NULL') #If the tape is empty, it prints the 'NULL' state
+        #If the tape is empty, it prints the 'NULL' state
+        print(Fore.BLUE+Text, end=' ')
+        print('NULL') 
         return 
     else: #If the tape is not empty
         #Empty values at the beggining of the tape are not shown
         while aux[0]=='_': #If the first value is empty
             del aux[0] #That cell is deleted
             if aux==[]: #If that causes the Tape to be empty
-                print(Text+'NULL') #The 'Null' state is printed
+                #The 'Null' state is printed
+                print(Fore.BLUE+Text, end=' ')
+                print('NULL')
                 return 
         #Empty values at the ending of the tape are not shown
         while aux[-1]=='_' and aux!=[]: del aux[-1] #If the las cell is empty, it is deleted
-        print(Text+''.join([str(elem) for elem in aux]).replace('_',' ')) #The tape state is printed as a string, the inner empy values are remplaced by spaces
+        #The tape state is printed as a string, the inner empy values are remplaced by spaces
+        print(Fore.BLUE+Text, end=' ')
+        print(''.join([str(elem) for elem in aux]).replace('_',' ')) 
 
 def Main():
     """
