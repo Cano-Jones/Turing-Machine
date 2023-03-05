@@ -49,3 +49,8 @@ An example of execution is shown (the file Addition.tm can be found on the CodeE
 After executing the Turing.py program using the Addition.tm file, the initial tape is printed after '>>' and the final tape is printes after '>>'. This example takes two binary numbers as initial tape and ads them.
 
 If there is any error on the file format, an error message stating the issue will be printed before exiting the program.
+
+Needed libraries:
+- sys
+- copy
+- colorama
