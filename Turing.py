@@ -122,7 +122,7 @@ def CodeCheck(Text):
     for i in range(4,len(Text)):
         if len(Text[i].split(','))!=5: return [False,'>ERROR: Command syntax, incorrect number of arguments'] #If not, there is an ERROR
     #Check if the initial state of the first command is the initial state ''@'
-    if Text[4][1]!='@': return [False,'>ERROR: No initial command'] #If not, there is an ERROR
+    if Text[4][1]!='@': return [False,'>ERROR: No initial command \'@\'] #If not, there is an ERROR
     #Chek if the values of the movement argument are correct (possible values are '+', '-' & 'X')
     for i in range(4,len(Text)):
         if Text[i].split(',')[3] not in ['+', '-', 'X']: return [False,'>ERROR: Command syntax, incorrect movement argument'] #If not, there is an ERROR
@@ -132,7 +132,7 @@ def CodeCheck(Text):
         if command.split(',')[4]=='#>': #If a stopping comand '#' is found, there is no ERROR
             aux=True
             break
-    if aux==False: return [False,'>ERROR: No stopping command'] #If no stopping command is found, there is an ERROR
+    if aux==False: return [False,'>ERROR: No stopping command \'#\'] #If no stopping command is found, there is an ERROR
     #Check if there are two commands with equal conditions
     for i in range(4,len(Text)): #Loop over all commands
         for j in range(i+1,len(Text)): #Loop over the commands different than the upper loop
