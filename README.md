@@ -50,7 +50,7 @@ After executing the Turing.py program using the Addition.tm file, the initial ta
 
 If there is any error on the file format, an error message stating the issue will be printed before exiting the program. Possible ERROR messages are:
 
-- `>ERROR: No inital comment header \'%\'
+- `>ERROR: No inital comment header \'%\'`
 
 - `>ERROR: No INPUT header`
 
