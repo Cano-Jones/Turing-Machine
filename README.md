@@ -50,21 +50,21 @@ After executing the Turing.py program using the Addition.tm file, the initial ta
 
 If there is any error on the file format, an error message stating the issue will be printed before exiting the program. Possible ERROR messages are:
 
-- `>ERROR: No inital comment header \'%\'`
+- `>ERROR: No inital comment header '%'`
 
 - `>ERROR: No INPUT header`
 
 - `>ERROR: No CODE header`
 
-- `>ERROR: Command syntax, \'<\' or \'>\' missing`
+- `>ERROR: Command syntax, '<' or '>' missing`
 
 - `>ERROR: Command syntax, incorrect number of arguments`
 
-- `>ERROR: No initial command \'@\`
+- `>ERROR: No initial command '@'`
 
 - `>ERROR: Command syntax, incorrect movement argument`
 
-- `>ERROR: No stopping command \'#\`
+- `>ERROR: No stopping command '#`
 
 - `>ERROR: Two commands with equal coditions`
 
