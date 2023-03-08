@@ -60,11 +60,11 @@ If there is any error on the file format, an error message stating the issue wil
 
 - `>ERROR: Command syntax, incorrect number of arguments`
 
-- `>ERROR: No initial command`
+- `>ERROR: No initial command \'@\`
 
 - `>ERROR: Command syntax, incorrect movement argument`
 
-- `>ERROR: No stopping command`
+- `>ERROR: No stopping command \'#\`
 
 - `>ERROR: Two commands with equal coditions`
 
