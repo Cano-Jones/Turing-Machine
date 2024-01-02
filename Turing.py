@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Turing.py
+Turing.py 
 
 This program simulates the functionality of a Turing Machine.
 Given a input and a set of commands (Code) it returns the value of the computation.
