@@ -72,36 +72,6 @@ def _load_from_file(filepath: str) -> dict[tuple[HeadStatus, Symbol], Instructio
 
 
 
-def _build_graph(script: Script):
-    graph = defaultdict(set)
-
-    for instr in script.transitions.values():
-        graph[instr.current_status].add(instr.next_status)
-
-    return graph
-
-def _has_cycle(graph: dict) -> bool:
-    visited = set()
-    stack = set()
-
-    def dfs(node):
-        if node in stack:
-            return True
-        if node in visited:
-            return False
-
-        visited.add(node)
-        stack.add(node)
-
-        for nxt in graph[node]:
-            if dfs(nxt):
-                return True
-
-        stack.remove(node)
-        return False
-
-    return any(dfs(n) for n in graph)
-
 def _validate_script(script: Script) -> None:
 
     if not any(instruction.current_status == INITIAL_HEAD_STATUS for instruction in script.transitions.values()):
@@ -114,20 +84,12 @@ def _validate_script(script: Script) -> None:
         raise SyntaxError(f"Instruction set cannot have instructions with current status {STOP_HEAD_STATUS} (reserved for halting)")
 
 
-    # Check for infinite loops
-
-
-
     for instruction in script.transitions.values(): # Only checks for 1-instruction loops...
         if (instruction.current_status == instruction.next_status
             and instruction.move == '='
             and instruction.read == instruction.write
             ):
             raise SyntaxError(f"Instruction {instruction} creates a trivial infinite loop")
-        
-    """graph = _build_graph(script) # Leave for future logging
-    if _has_cycle(graph):
-        print("Warning: potential infinite state cycle detected")"""
 
 if __name__ == "__main__":
     raise ImportError("This module is not meant to be run directly.")

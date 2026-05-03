@@ -28,8 +28,14 @@ class Tape(dict[int, str]):
         if not self:
             return "[]"
 
-        min_p = min(self)
-        max_p = max(self)
+        # Find leftmost and rightmost non-blank positions
+        non_blank_positions = [pos for pos in self if self[pos] != BLANK_SYMBOL]
+        
+        if not non_blank_positions:
+            return "[]"
+        
+        min_p = min(non_blank_positions)
+        max_p = max(non_blank_positions)
 
         return "[" + "".join(self[i] for i in range(min_p, max_p + 1)) + "]"
 
