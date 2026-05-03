@@ -3,6 +3,13 @@ from datetime import datetime
 
 
 def parse_arguments():
+    """
+    Parses command-line arguments for the Turing-Machine application.
+    Returns
+    -------
+    argparse.Namespace
+        An object containing the parsed command-line arguments.
+    """
 
     parser = argparse.ArgumentParser(prog = "Turing-Machine",
                                       description = "A Turing-Machine implementation in Python",

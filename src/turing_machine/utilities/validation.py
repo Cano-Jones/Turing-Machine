@@ -1,7 +1,26 @@
 import re
 from ..config import STOP_HEAD_STATUS
 
-def validate_script(filepath: str):
+def validate_script(filepath: str) -> None:
+    """
+    Validates the Turing-Machine script file for correct format and potential issues.
+
+    Parameters
+    ----------
+    filepath : str
+        The path to the Turing-Machine script file to be validated.
+    
+    Returns
+    -------
+    None
+
+    Raises
+    ------
+    FileNotFoundError
+        If the specified script file does not exist.
+    SyntaxError
+        If the script file does not conform to the expected format or contains invalid instructions.
+    """
 
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -21,11 +40,29 @@ def validate_script(filepath: str):
                 else:
                     raise SyntaxError(f"Invalid instruction line format at line {line_counter + 1}")
                 line_counter += 1
-                
+
     except FileNotFoundError:
         raise FileNotFoundError(f"Script file not found: {filepath}")
 
 def _validate_instruction_line(instruction_line: str):
+    """
+    Validates a single instruction line from the Turing-Machine script.
+    
+    Parameters
+    ----------
+    instruction_line : str
+        A line from the script file that is expected to contain an instruction in the format:
+        <current_status, read_symbol, write_symbol, move_direction, next_status>
+    
+    Returns
+    -------
+    None
+    
+    Raises
+    ------
+    SyntaxError
+        If the instruction line does not conform to the expected format or contains invalid components.
+    """
 
     pattern = re.compile(r'<(.*?)>')
     match = pattern.search(instruction_line)
