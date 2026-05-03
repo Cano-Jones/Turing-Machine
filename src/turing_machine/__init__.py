@@ -1,5 +1,6 @@
 from .core import *
 from .config import *
+from .utilities import *
 
 __all__ = [
     "Head",
@@ -14,5 +15,8 @@ __all__ = [
     "MOVEMENT_TABLE",
     "HeadStatus",
     "Movement",
-    "Symbol"
+    "Symbol",
+    "parse_arguments",
+    "logging_setup",
+    "validate_script"
 ]

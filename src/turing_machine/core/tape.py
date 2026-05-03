@@ -1,9 +1,12 @@
+import logging
 
 from ..config.constants import BLANK_SYMBOL
 
+logger = logging.getLogger(__name__)
+
 class Tape(dict[int, str]):
 
-    def __init__(self, filepath: str, arg_input: str | None = None) -> None:
+    def __init__(self, filepath: str, arg_input: str | None = None, log = None) -> None:
         super().__init__()
 
         if arg_input is None:
@@ -13,6 +16,9 @@ class Tape(dict[int, str]):
 
         for i, char in enumerate(tape_str):
             self[i] = char
+
+        if log is not None:
+            logger.info(f"Initialized tape with input: '{tape_str}'")
 
     def __missing__(self, key: int) -> str:
         self[key] = BLANK_SYMBOL

@@ -1,13 +1,17 @@
 import re
 from collections import defaultdict
+import logging
 
 from ..config.types import HeadStatus, Symbol
 from ..config.constants import INITIAL_HEAD_STATUS, STOP_HEAD_STATUS
 from .instruction import Instruction
 
+logger = logging.getLogger(__name__)
+
 class Script:
-    def __init__(self, filepath: str, transitions: dict[tuple[HeadStatus, Symbol], Instruction] | None = None) -> None:
-        
+    def __init__(self, filepath: str, transitions: dict[tuple[HeadStatus, Symbol], Instruction] | None = None, log = None) -> None:
+        self.log = log
+
         self.transitions = (
             _load_from_file(filepath)
             if transitions is None
@@ -15,8 +19,16 @@ class Script:
         )
 
         self._validate()
+
+        if self.log is not None:
+            logger.info(f"Script loaded successfully from {filepath} with instructions:\n{repr(self)}")
+            
     
     def __call__(self, head_status: HeadStatus, symbol: Symbol) -> Instruction | None:
+
+        if self.log is not None:
+            logger.debug(f"Fetching instruction for head status '{head_status}' and symbol '{symbol}'")
+
         return self.transitions.get((head_status, symbol))
     
     def _validate(self) -> None:
@@ -24,6 +36,14 @@ class Script:
 
     def __setitem__(self, key, value):
         raise TypeError("Script is immutable")
+    
+    def __str__(self) -> str:
+        rep = "{"
+        for instr in self.transitions.values():
+            rep += f" {instr} |"
+        return rep + "}"
+    def __repr__(self) -> str:
+        return "\n".join(str(instr) for instr in self.transitions.values())
 
 def _load_from_file(filepath: str) -> dict[tuple[HeadStatus, Symbol], Instruction]:
 
